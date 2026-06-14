@@ -35,8 +35,7 @@ class AuthController extends Controller
             'senha' => Hash::make($request->senha)
         ]);
 
-        return redirect('/login')
-            ->with('success', 'Cadastro realizado com sucesso!');
+        return redirect('/login')->with('success', 'Cadastro realizado com sucesso!');
     }
 
     public function login(Request $request)
