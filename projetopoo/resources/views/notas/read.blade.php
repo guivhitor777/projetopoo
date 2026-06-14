@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Aluno Modern | Notas</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#adc6ff", "on-primary": "#002e69", "background": "#0b0e14",
+                        "surface": "#0b0e14", "surface-container": "#11151d", "surface-container-low": "#181c23",
+                        "on-surface": "#e0e2ed", "on-surface-variant": "#9ba1ad", "outline-variant": "#414755", "error": "#ffb4ab"
+                    },
+                    spacing: { "sidebar-width": "260px", "gutter": "24px" },
+                    fontFamily: { "body": ["Inter", "sans-serif"] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b0e14;
+            color: #e0e2ed;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0b0e14;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #31353d;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface min-h-screen">
+
+    <!-- Sidebar -->
+    <aside
+        class="fixed left-0 top-0 h-screen w-[260px] bg-surface/40 backdrop-blur-xl border-r border-white/10 flex flex-col py-6 px-4 z-50">
+        <div class="mb-10 px-4">
+            <h1 class="text-3xl font-bold text-primary tracking-tighter">Aluno Modern</h1>
+        </div>
+        <nav class="flex flex-col flex-1">
+            <div class="space-y-2">
+                <a href="{{ url('/painel') }}"
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 transition-colors">
+                    <span class="material-symbols-outlined">dashboard</span><span>Painel</span>
+                </a>
+                <a href="{{ url('/alunos') }}"
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 transition-colors">
+                    <span class="material-symbols-outlined">school</span><span>Alunos</span>
+                </a>
+                <a href="{{ url('/notas') }}"
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary bg-primary/10 border-l-2 border-primary transition-colors">
+                    <span class="material-symbols-outlined">grade</span><span>Notas</span>
+                </a>
+                <a href="{{ url('/tarefas') }}"
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 transition-colors">
+                    <span class="material-symbols-outlined">assignment</span><span>Tarefas</span>
+                </a>
+            </div>
+            <a href="{{ url('/logout') }}" onclick="return confirm('Tem certeza que deseja sair?')"
+                class="mt-auto flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-red-400 transition-colors">
+                <span class="material-symbols-outlined">logout</span><span>Sair</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Header -->
+    <header
+        class="ml-[260px] h-20 px-8 flex items-center justify-between border-b border-white/10 bg-surface/50 backdrop-blur-md sticky top-0 z-40">
+        <div>
+            <h2 class="text-xl font-bold">Notas</h2>
+            <p class="text-xs text-on-surface-variant">Gerencie as notas cadastradas.</p>
+        </div>
+        <div class="flex items-center gap-3 pl-4 border-l border-white/10">
+            <div class="text-right">
+                <p class="text-[10px] text-primary uppercase tracking-widest">Nível Máx.</p>
+                <p class="text-sm font-bold">{{ Session::get('usuario_nome', 'Administrador') }}</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="ml-[260px] pt-8 min-h-screen flex flex-col">
+        <div class="p-8 flex-1">
+
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-3">
+                <div>
+                    <h2 class="text-4xl font-bold tracking-tight mb-3">Notas</h2>
+                    <div class="w-1/2 h-1 bg-primary mb-4"></div>
+                    <p class="text-on-surface-variant text-lg">Gerencie as notas cadastradas no sistema.</p>
+                </div>
+                <a href="{{ url('/notas/create') }}"
+                    class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all text-sm">
+                    <span class="material-symbols-outlined">add_circle</span>
+                    ADICIONAR NOTA
+                </a>
+            </div>
+
+            <div class="bg-surface-container-low border border-outline-variant/20 rounded-xl overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-white/5 bg-white/5">
+                                <th
+                                    class="py-5 px-8 text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider">
+                                    ID</th>
+                                <th
+                                    class="py-5 px-8 text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider">
+                                    Aluno</th>
+                                <th
+                                    class="py-5 px-8 text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider">
+                                    Disciplina</th>
+                                <th
+                                    class="py-5 px-8 text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider">
+                                    Nota</th>
+                                <th
+                                    class="py-5 px-8 text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider text-right">
+                                    Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            @forelse ($notas as $nota)
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-6 px-8 text-on-surface-variant">#{{ $nota->id }}</td>
+                                    <td class="py-6 px-8">{{ $nota->aluno->nome ?? 'N/A' }}</td>
+                                    <td class="py-6 px-8 text-on-surface-variant">{{ $nota->disciplina }}</td>
+                                    <td class="py-6 px-8"><span class="font-bold text-primary">{{ $nota->nota }}</span></td>
+                                    <td class="py-6 px-8 text-right">
+                                        <div class="flex items-center justify-end gap-3">
+                                            <a href="{{ url('/notas/' . $nota->id . '/edit') }}"
+                                                class="w-10 h-10 flex items-center justify-center rounded-lg border border-white/10 hover:border-primary/50 hover:bg-primary/10 text-on-surface-variant hover:text-primary transition-all">
+                                                <span class="material-symbols-outlined">edit</span>
+                                            </a>
+                                            <button onclick="confirmDelete({{ $nota->id }})"
+                                                class="w-10 h-10 flex items-center justify-center rounded-lg border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 text-on-surface-variant hover:text-red-500 transition-all">
+                                                <span class="material-symbols-outlined">delete</span>
+                                            </button>
+                                            <form id="delete-form-{{ $nota->id }}" action="{{ url('/notas/' . $nota->id) }}"
+                                                method="POST" class="hidden">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="py-12 px-8 text-center text-on-surface-variant">Nenhuma nota
+                                        cadastrada ainda.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="fixed bottom-4 left-0 right-0 flex justify-center items-center gap-8 opacity-40 text-center">
+            <div class="h-[1px] w-8 bg-white/30 hidden sm:block"></div>
+            <span class="text-[10px] tracking-[0.3em] uppercase">Aluno Modern</span>
+            <span class="material-symbols-outlined text-[14px]">verified_user</span>
+        </footer>
+    </main>
+
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                icon: 'warning', title: 'Excluir nota?', text: 'Esta ação não pode ser desfeita.',
+                showCancelButton: true, confirmButtonText: 'Sim, excluir', cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#ef4444', cancelButtonColor: '#414755', background: '#0b0e14', color: '#e0e2ed'
+            }).then((result) => { if (result.isConfirmed) document.getElementById('delete-form-' + id).submit(); });
+        }
+    </script>
+
+    @if (session('success'))
+        <script>Swal.fire({ icon: 'success', title: 'Sucesso!', text: '{{ session('success') }}', confirmButtonColor: '#adc6ff', background: '#0b0e14', color: '#e0e2ed' });</script>
+    @endif
+    @if (session('error'))
+        <script>Swal.fire({ icon: 'error', title: 'Erro!', text: '{{ session('error') }}', confirmButtonColor: '#adc6ff', background: '#0b0e14', color: '#e0e2ed' });</script>
+    @endif
+
+</body>
+
+</html>
