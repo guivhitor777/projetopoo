@@ -56,4 +56,15 @@ class AuthController extends Controller
 
         return redirect('/painel');
     }
+
+    public function showPainel()
+    {
+        return view('painel');
+    }
+
+    public function logout()
+    {
+        Session::flush();
+        return redirect('/login');
+    }
 }
