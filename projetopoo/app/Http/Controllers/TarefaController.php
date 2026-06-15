@@ -1,65 +1,62 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Tarefa;
 
 class TarefaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $tarefas = Tarefa::all();
+        return view('tarefas.read', compact('tarefas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('tarefas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'disciplina' => 'required',
+            'descricao' => 'required',
+            'prazo' => 'required|date'
+        ]);
+        Tarefa::create([
+            'disciplina' => $request->disciplina,
+            'descricao' => $request->descricao,
+            'prazo' => $request->prazo
+        ]);
+        return redirect('/tarefas')->with('success', 'Tarefa cadastrada com sucesso!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $tarefa = Tarefa::findOrFail($id);
+        return view('tarefas.update', compact('tarefa'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'disciplina' => 'required',
+            'descricao' => 'required',
+            'prazo' => 'required|date'
+        ]);
+        $tarefa = Tarefa::findOrFail($id);
+        $tarefa->update([
+            'disciplina' => $request->disciplina,
+            'descricao' => $request->descricao,
+            'prazo' => $request->prazo
+        ]);
+        return redirect('/tarefas')->with('success', 'Tarefa atualizada com sucesso!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        Tarefa::findOrFail($id)->delete();
+        return redirect('/tarefas')->with('success', 'Tarefa removida com sucesso!');
     }
 }
