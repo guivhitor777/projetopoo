@@ -1,26 +1,24 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Aluno;
-use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
-class AuthController extends Controller
+class AlunoController extends Controller
 {
-    public function showLogin()
+    public function index()
     {
-        return view('auth.login');
+        $alunos = Aluno::all();
+        return view('alunos.read', compact('alunos'));
     }
 
-    public function showRegister()
+    public function create()
     {
-        return view('auth.register');
+        return view('alunos.create');
     }
 
-    public function register(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'nome' => 'required',
@@ -28,33 +26,31 @@ class AuthController extends Controller
             'senha' => 'required|min:6',
             'confirmar_senha' => 'required|same:senha'
         ]);
-
         Aluno::create([
             'nome' => $request->nome,
             'email' => $request->email,
             'senha' => Hash::make($request->senha)
         ]);
-
-        return redirect('/login')
-            ->with('success', 'Cadastro realizado com sucesso!');
+        return redirect('/alunos')->with('success', 'Aluno cadastrado com sucesso!');
     }
 
-    public function login(Request $request)
+    public function edit($id)
     {
-        $usuario = Usuario::where('email', $request->email)->first();
+        $aluno = Aluno::findOrFail($id);
+        return view('alunos.update', compact('aluno'));
+    }
 
-        if (!$usuario || !Hash::check($request->senha, $usuario->senha)) {
-            return back()->with('error', 'E-mail ou senha inválidos.');
-        }
+    public function update(Request $request, $id)
+    {
+        $request->validate(['nome' => 'required', 'email' => 'required|email']);
+        $aluno = Aluno::findOrFail($id);
+        $aluno->update(['nome' => $request->nome, 'email' => $request->email]);
+        return redirect('/alunos')->with('success', 'Aluno atualizado com sucesso!');
+    }
 
-        if ($usuario->tipo !== 'adm') {
-            return back()->with('error', 'Acesso restrito apenas para administradores.');
-        }
-
-        Session::put('usuario_id', $usuario->id);
-        Session::put('usuario_nome', $usuario->nome);
-        Session::put('usuario_tipo', $usuario->tipo);
-
-        return redirect('/painel');
+    public function destroy($id)
+    {
+        Aluno::findOrFail($id)->delete();
+        return redirect('/alunos')->with('success', 'Aluno removido com sucesso!');
     }
 }
