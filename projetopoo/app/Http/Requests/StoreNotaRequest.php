@@ -1,29 +1,31 @@
 <?php
-
 namespace App\Http\Requests;
-
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreNotaRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'id_aluno' => 'required|exists:alunos,id',
+            'disciplina' => 'required|string|max:255',
+            'nota' => 'required|numeric|min:0|max:10'
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'id_aluno.required' => 'Selecione um aluno.',
+            'id_aluno.exists' => 'Aluno não encontrado.',
+            'disciplina.required' => 'A disciplina é obrigatória.',
+            'nota.required' => 'A nota é obrigatória.',
+            'nota.numeric' => 'A nota deve ser um número.',
+            'nota.min' => 'A nota mínima é 0.',
+            'nota.max' => 'A nota máxima é 10.',
         ];
     }
 }
