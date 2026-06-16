@@ -62,7 +62,6 @@
 
 <body class="min-h-screen">
 
-    <!-- Sidebar -->
     <aside
         class="fixed left-0 top-0 h-screen w-[280px] bg-surface/40 backdrop-blur-xl border-r border-white/10 flex flex-col py-6 px-4 z-50">
         <div class="mb-10 px-4">
@@ -153,8 +152,7 @@
 
                     <!-- Email -->
                     <div class="space-y-2">
-                        <label class="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">E-mail
-                            Institucional</label>
+                        <label class="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">E-mail</label>
                         <div
                             class="relative glow-border border border-white/10 rounded-lg bg-black/20 transition-all duration-300 flex items-center">
                             <span class="material-symbols-outlined text-slate-500 ml-4">alternate_email</span>
