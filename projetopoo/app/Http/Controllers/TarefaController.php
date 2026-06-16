@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreTarefaRequest;
+use App\Http\Requests\UpdateTarefaRequest;
 use App\Models\Tarefa;
 
 class TarefaController extends Controller
@@ -17,13 +18,8 @@ class TarefaController extends Controller
         return view('tarefas.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreTarefaRequest $request)
     {
-        $request->validate([
-            'disciplina' => 'required',
-            'descricao' => 'required',
-            'prazo' => 'required|date'
-        ]);
         Tarefa::create([
             'disciplina' => $request->disciplina,
             'descricao' => $request->descricao,
@@ -38,13 +34,8 @@ class TarefaController extends Controller
         return view('tarefas.update', compact('tarefa'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateTarefaRequest $request, $id)
     {
-        $request->validate([
-            'disciplina' => 'required',
-            'descricao' => 'required',
-            'prazo' => 'required|date'
-        ]);
         $tarefa = Tarefa::findOrFail($id);
         $tarefa->update([
             'disciplina' => $request->disciplina,

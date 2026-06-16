@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreNotaRequest;
+use App\Http\Requests\UpdateNotaRequest;
 use App\Models\Nota;
 use App\Models\Aluno;
 
@@ -19,13 +20,8 @@ class NotaController extends Controller
         return view('notas.create', compact('alunos'));
     }
 
-    public function store(Request $request)
+    public function store(StoreNotaRequest $request)
     {
-        $request->validate([
-            'id_aluno' => 'required|exists:alunos,id',
-            'disciplina' => 'required',
-            'nota' => 'required|numeric|min:0|max:10'
-        ]);
         Nota::create([
             'id_aluno' => $request->id_aluno,
             'disciplina' => $request->disciplina,
@@ -41,13 +37,8 @@ class NotaController extends Controller
         return view('notas.update', compact('nota', 'alunos'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateNotaRequest $request, $id)
     {
-        $request->validate([
-            'id_aluno' => 'required|exists:alunos,id',
-            'disciplina' => 'required',
-            'nota' => 'required|numeric|min:0|max:10'
-        ]);
         $nota = Nota::findOrFail($id);
         $nota->update([
             'id_aluno' => $request->id_aluno,

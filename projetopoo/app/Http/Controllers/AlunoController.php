@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreAlunoRequest;
+use App\Http\Requests\UpdateAlunoRequest;
 use App\Models\Aluno;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,14 +19,8 @@ class AlunoController extends Controller
         return view('alunos.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreAlunoRequest $request)
     {
-        $request->validate([
-            'nome' => 'required',
-            'email' => 'required|email',
-            'senha' => 'required|min:6',
-            'confirmar_senha' => 'required|same:senha'
-        ]);
         Aluno::create([
             'nome' => $request->nome,
             'email' => $request->email,
@@ -40,9 +35,8 @@ class AlunoController extends Controller
         return view('alunos.update', compact('aluno'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateAlunoRequest $request, $id)
     {
-        $request->validate(['nome' => 'required', 'email' => 'required|email']);
         $aluno = Aluno::findOrFail($id);
         $aluno->update(['nome' => $request->nome, 'email' => $request->email]);
         return redirect('/alunos')->with('success', 'Aluno atualizado com sucesso!');
