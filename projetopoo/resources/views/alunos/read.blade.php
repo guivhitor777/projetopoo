@@ -134,7 +134,7 @@
                 <tbody class="divide-y divide-white/5">
                     @forelse ($alunos as $aluno)
                         <tr class="hover:bg-white/[0.02] transition-colors group">
-                            <td class="py-6 px-8">{{ $aluno->id }}</td>
+                            <td class="py-6 px-8">#{{ $aluno->id }}</td>
                             <td class="py-6 px-8">{{ $aluno->nome }}</td>
                             <td class="py-6 px-8">{{ $aluno->email }}</td>
                             <td class="py-6 px-8 text-right">
