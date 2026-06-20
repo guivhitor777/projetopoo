@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Nota;
+use App\Models\Tarefa;
 use App\Models\Aluno;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
@@ -59,7 +61,28 @@ class AuthController extends Controller
 
     public function showPainel()
     {
-        return view('painel');
+        $totalAlunos = Aluno::count();
+        $totalNotas = Nota::count();
+        $totalTarefas = Tarefa::count();
+        $mediaGeral = Nota::avg('nota');
+
+        $tarefasProximas = Tarefa::where('prazo', '>=', now())
+            ->orderBy('prazo', 'asc')
+            ->take(5)
+            ->get();
+
+        $notasPorDisciplina = Nota::selectRaw('disciplina, AVG(nota) as media')
+            ->groupBy('disciplina')
+            ->get();
+
+        return view('painel', compact(
+            'totalAlunos',
+            'totalNotas',
+            'totalTarefas',
+            'mediaGeral',
+            'tarefasProximas',
+            'notasPorDisciplina'
+        ));
     }
 
     public function logout()
