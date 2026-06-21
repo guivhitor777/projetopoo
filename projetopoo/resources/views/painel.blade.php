@@ -167,7 +167,7 @@
 
         <div class="p-gutter max-w-[1440px] mx-auto space-y-gutter">
 
-            <!-- Título -->
+            <!-- Título + Atalhos -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <h2 class="font-display-lg text-display-lg text-white">Bem-vindo ao Aluno Modern</h2>
@@ -177,6 +177,24 @@
                             Sincronização Ativa
                         </span>
                     </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <a href="{{ url('/alunos') }}"
+                        class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 hover:bg-primary/10 hover:border-primary/30 text-on-secondary-container hover:text-primary transition-all text-sm font-medium">
+                        <span class="material-symbols-outlined text-base">school</span>
+                        Alunos
+                    </a>
+                    <a href="{{ url('/notas') }}"
+                        class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 hover:bg-primary/10 hover:border-primary/30 text-on-secondary-container hover:text-primary transition-all text-sm font-medium">
+                        <span class="material-symbols-outlined text-base">grade</span>
+                        Notas
+                    </a>
+                    <a href="{{ url('/tarefas') }}"
+                        class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 hover:bg-tertiary-container/10 hover:border-tertiary-container/30 text-on-secondary-container hover:text-tertiary-container transition-all text-sm font-medium">
+                        <span class="material-symbols-outlined text-base">assignment</span>
+                        Tarefas
+                    </a>
                 </div>
             </div>
 
@@ -263,53 +281,6 @@
                         Ver todas as tarefas
                         <span class="material-symbols-outlined text-sm">arrow_forward</span>
                     </a>
-                </div>
-
-            </div>
-
-            <!-- Cards de navegação -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-
-                <div class="glass-card p-6 rounded-xl group hover:border-primary/40 transition-all duration-500 relative">
-                    <a href="{{ url('/alunos') }}"
-                        class="absolute top-4 right-4 px-4 py-2 bg-primary text-on-primary rounded-lg transition-all hover:brightness-110 shadow-sm shadow-primary/20 flex items-center gap-2 font-medium">
-                        Acessar Alunos
-                        <span class="material-symbols-outlined text-sm">north_east</span>
-                    </a>
-                    <div class="flex items-end justify-between">
-                        <h3 class="font-display-lg text-4xl text-primary font-bold">Alunos</h3>
-                    </div>
-                    <div class="w-full bg-white/5 h-1 mt-4 rounded-full overflow-hidden">
-                        <div class="bg-primary h-full w-full shadow-[0_0_8px_#adc6ff]"></div>
-                    </div>
-                </div>
-
-                <div class="glass-card p-6 rounded-xl group hover:border-primary/40 transition-all duration-500 relative">
-                    <a href="{{ url('/notas') }}"
-                        class="absolute top-4 right-4 px-4 py-2 bg-primary text-on-primary rounded-lg transition-all hover:brightness-110 shadow-sm shadow-primary/20 flex items-center gap-2 font-medium">
-                        Acessar Notas
-                        <span class="material-symbols-outlined text-sm">north_east</span>
-                    </a>
-                    <div class="flex items-end justify-between">
-                        <h3 class="font-display-lg text-4xl text-white font-bold">Notas</h3>
-                    </div>
-                    <div class="w-full bg-white/5 h-1 mt-4 rounded-full overflow-hidden">
-                        <div class="bg-white/40 h-full w-full"></div>
-                    </div>
-                </div>
-
-                <div class="glass-card p-6 rounded-xl group hover:border-primary/40 transition-all duration-500 relative">
-                    <a href="{{ url('/tarefas') }}"
-                        class="absolute top-4 right-4 px-4 py-2 bg-primary text-on-primary rounded-lg transition-all hover:brightness-110 shadow-sm shadow-primary/20 flex items-center gap-2 font-medium">
-                        Acessar Tarefas
-                        <span class="material-symbols-outlined text-sm">north_east</span>
-                    </a>
-                    <div class="flex items-end justify-between">
-                        <h3 class="font-display-lg text-4xl text-tertiary-container font-bold">Tarefas</h3>
-                    </div>
-                    <div class="w-full bg-white/5 h-1 mt-4 rounded-full overflow-hidden">
-                        <div class="bg-tertiary-container h-full w-full shadow-[0_0_8px_#ef6719]"></div>
-                    </div>
                 </div>
 
             </div>
