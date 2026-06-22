@@ -11,5 +11,9 @@ class Tarefa extends Model
     protected $table = 'tarefas';
     public $timestamps = false;
 
-    protected $fillable = ['disciplina', 'descricao', 'prazo'];
+    protected $fillable = ['disciplina', 'descricao', 'prazo', 'concluida'];
+
+    protected $casts = [
+        'concluida' => 'boolean',
+    ];
 }

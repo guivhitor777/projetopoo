@@ -4,17 +4,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Nota extends Model
+class Tarefa extends Model
 {
     use HasFactory;
 
-    protected $table = 'notas';
+    protected $table = 'tarefas';
     public $timestamps = false;
 
-    protected $fillable = ['id_aluno', 'disciplina', 'nota'];
-
-    public function aluno()
-    {
-        return $this->belongsTo(Aluno::class, 'id_aluno');
-    }
+    protected $fillable = ['disciplina', 'descricao', 'prazo', 'concluida'];
 }

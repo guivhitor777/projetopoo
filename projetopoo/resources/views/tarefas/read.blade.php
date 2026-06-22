@@ -147,37 +147,69 @@
                                 Prazo de Entrega</th>
                             <th
                                 class="py-5 px-8 text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider text-center">
+                                Status</th>
+                            <th
+                                class="py-5 px-8 text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider text-center">
                                 Ações</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-white/5">
                         @forelse ($tarefas as $tarefa)
-                            <tr class="hover:bg-white/[0.02] transition-colors">
-                                <td class="py-6 px-8">{{ $tarefa->id }}</td>
-                                <td class="py-6 px-8">{{ $tarefa->disciplina }}</td>
-                                <td class="py-6 px-8">{{ $tarefa->descricao }}</td>
-                                <td class="py-6 px-8">{{ \Carbon\Carbon::parse($tarefa->prazo)->format('d/m/Y') }}</td>
-                                <td class="py-6 px-8 text-center">
-                                    <div class="flex items-center justify-center gap-3">
-                                        <a href="{{ url('/tarefas/' . $tarefa->id . '/edit') }}"
-                                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-white/10 hover:border-primary/50 hover:bg-primary/10 text-on-surface-variant hover:text-primary transition-all">
-                                            <span class="material-symbols-outlined">edit</span>
-                                        </a>
-                                        <button onclick="confirmDelete({{ $tarefa->id }})"
-                                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 text-on-surface-variant hover:text-red-500 transition-all">
-                                            <span class="material-symbols-outlined">delete</span>
-                                        </button>
-                                        <form id="delete-form-{{ $tarefa->id }}"
-                                            action="{{ url('/tarefas/' . $tarefa->id) }}" method="POST" class="hidden">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
+                                            <tr
+                                                class="hover:bg-white/[0.02] transition-colors {{ $tarefa->concluida ? 'opacity-50' : '' }}">
+                                                <td class="py-6 px-8">{{ $tarefa->id }}</td>
+                                                <td class="py-6 px-8 {{ $tarefa->concluida ? 'line-through' : '' }}">
+                                                    {{ $tarefa->disciplina }}</td>
+                                                <td class="py-6 px-8 {{ $tarefa->concluida ? 'line-through' : '' }}">
+                                                    {{ $tarefa->descricao }}</td>
+                                                <td class="py-6 px-8">
+                                                    @php
+                                                        $atrasada = !$tarefa->concluida && \Carbon\Carbon::parse($tarefa->prazo)->isPast();
+                                                    @endphp
+                                                    <span class="{{ $atrasada ? 'text-red-400 font-bold' : '' }}">
+                                                        {{ \Carbon\Carbon::parse($tarefa->prazo)->format('d/m/Y') }}
+                                                    </span>
+                                                    @if ($atrasada)
+                                                        <span class="text-[10px] text-red-400 block uppercase tracking-wide">Atrasada</span>
+                                                    @endif
+                                                </td>
+                                                <td class="py-6 px-8 text-center">
+                                                    <form action="{{ url('/tarefas/' . $tarefa->id . '/toggle') }}" method="POST">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <button type="submit"
+                                                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all
+                                                                    {{ $tarefa->concluida
+                            ? 'bg-green-500/15 text-green-400 border border-green-500/30 hover:bg-green-500/25'
+                            : 'bg-white/5 text-on-surface-variant border border-white/10 hover:bg-white/10' }}">
+                                                            <span class="material-symbols-outlined text-sm">
+                                                                {{ $tarefa->concluida ? 'check_circle' : 'radio_button_unchecked' }}
+                                                            </span>
+                                                            {{ $tarefa->concluida ? 'Concluída' : 'Pendente' }}
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <td class="py-6 px-8 text-center">
+                                                    <div class="flex items-center justify-center gap-3">
+                                                        <a href="{{ url('/tarefas/' . $tarefa->id . '/edit') }}"
+                                                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-white/10 hover:border-primary/50 hover:bg-primary/10 text-on-surface-variant hover:text-primary transition-all">
+                                                            <span class="material-symbols-outlined">edit</span>
+                                                        </a>
+                                                        <button onclick="confirmDelete({{ $tarefa->id }})"
+                                                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 text-on-surface-variant hover:text-red-500 transition-all">
+                                                            <span class="material-symbols-outlined">delete</span>
+                                                        </button>
+                                                        <form id="delete-form-{{ $tarefa->id }}"
+                                                            action="{{ url('/tarefas/' . $tarefa->id) }}" method="POST" class="hidden">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="py-12 px-8 text-center text-on-surface-variant">Nenhuma tarefa
+                                <td colspan="6" class="py-12 px-8 text-center text-on-surface-variant">Nenhuma tarefa
                                     cadastrada ainda.</td>
                             </tr>
                         @endforelse

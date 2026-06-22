@@ -45,6 +45,13 @@ class TarefaController extends Controller
         return redirect('/tarefas')->with('success', 'Tarefa atualizada com sucesso!');
     }
 
+    public function toggleStatus($id)
+    {
+        $tarefa = Tarefa::findOrFail($id);
+        $tarefa->update(['concluida' => !$tarefa->concluida]);
+        return redirect('/tarefas')->with('success', 'Status da tarefa atualizado!');
+    }
+
     public function destroy($id)
     {
         Tarefa::findOrFail($id)->delete();

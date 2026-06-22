@@ -39,5 +39,6 @@ Route::middleware([CheckLogin::class])->group(function () {
     Route::post('/tarefas', [TarefaController::class, 'store']);
     Route::get('/tarefas/{id}/edit', [TarefaController::class, 'edit']);
     Route::put('/tarefas/{id}', [TarefaController::class, 'update']);
+    Route::patch('/tarefas/{id}/toggle', [TarefaController::class, 'toggleStatus']);
     Route::delete('/tarefas/{id}', [TarefaController::class, 'destroy']);
 });
