@@ -4,19 +4,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAlunoRequest;
 use App\Http\Requests\UpdateAlunoRequest;
 use App\Models\Aluno;
+use App\Models\Nota;
 use Illuminate\Support\Facades\Hash;
 
 class AlunoController extends Controller
 {
     public function index()
     {
-        $alunos = Aluno::all();
+        $alunos = Aluno::all()->map(function ($aluno) {
+            $media = Nota::where('id_aluno', $aluno->id)->avg('nota');
+            $aluno->media = $media;
+            $aluno->situacao = $media === null ? null : ($media >= 6.0 ? 'aprovado' : 'reprovado');
+            return $aluno;
+        });
         return view('alunos.read', compact('alunos'));
-    }
-
-    public function create()
-    {
-        return view('alunos.create');
     }
 
     public function store(StoreAlunoRequest $request)

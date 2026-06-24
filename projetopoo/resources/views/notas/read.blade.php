@@ -139,6 +139,9 @@
                                     class="py-5 px-8 text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider">
                                     Nota</th>
                                 <th
+                                    class="py-5 px-8 text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider text-center">
+                                    Situação</th>
+                                <th
                                     class="py-5 px-8 text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider text-right">
                                     Ações</th>
                             </tr>
@@ -150,6 +153,21 @@
                                     <td class="py-6 px-8">{{ $nota->aluno->nome ?? 'N/A' }}</td>
                                     <td class="py-6 px-8 text-on-surface-variant">{{ $nota->disciplina }}</td>
                                     <td class="py-6 px-8"><span class="font-bold text-primary">{{ $nota->nota }}</span></td>
+                                    <td class="py-6 px-8 text-center">
+                                        @if ($nota->nota >= 6.0)
+                                            <span
+                                                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-green-500/15 text-green-400 border border-green-500/30">
+                                                <span class="material-symbols-outlined text-sm">check_circle</span>
+                                                Aprovado
+                                            </span>
+                                        @else
+                                            <span
+                                                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-red-500/15 text-red-400 border border-red-500/30">
+                                                <span class="material-symbols-outlined text-sm">cancel</span>
+                                                Reprovado
+                                            </span>
+                                        @endif
+                                    </td>
                                     <td class="py-6 px-8 text-right">
                                         <div class="flex items-center justify-end gap-3">
                                             <a href="{{ url('/notas/' . $nota->id . '/edit') }}"
@@ -170,7 +188,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="py-12 px-8 text-center text-on-surface-variant">Nenhuma nota
+                                    <td colspan="6" class="py-12 px-8 text-center text-on-surface-variant">Nenhuma nota
                                         cadastrada ainda.</td>
                                 </tr>
                             @endforelse
