@@ -122,21 +122,64 @@
                 </a>
             </div>
 
+            <!-- Busca -->
+            <form method="GET" action="{{ url('/alunos') }}" class="mb-6">
+                <div class="relative max-w-[200px]">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/50 text-base">
+                        search
+                    </span>
+                    <input type="text" name="busca" value="{{ $busca ?? '' }}" placeholder="Buscar..."
+                        class="w-full bg-[#1c1f26] border border-white/10 rounded-lg py-1.5 pl-9 pr-3 text-xs text-on-surface placeholder:text-on-surface-variant/40 outline-none focus:border-primary/50 transition-all" />
+                </div>
+                @if (!empty($busca))
+                    <a href="{{ url('/alunos') }}"
+                        class="text-xs text-on-surface-variant hover:text-primary mt-2 inline-block">
+                        Limpar busca
+                    </a>
+                @endif
+            </form>
+
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="border-b border-white/5 bg-white/5">
                         <th class="py-5 px-8">ID</th>
                         <th class="py-5 px-8">Nome Completo</th>
                         <th class="py-5 px-8">E-mail Institucional</th>
+                        <th class="py-5 px-8 text-center">Média</th>
+                        <th class="py-5 px-8 text-center">Situação</th>
                         <th class="py-5 px-8 text-right">Ações</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-white/5">
                     @forelse ($alunos as $aluno)
                         <tr class="hover:bg-white/[0.02] transition-colors group">
-                            <td class="py-6 px-8">#{{ $aluno->id }}</td>
+                            <td class="py-6 px-8">{{ $aluno->id }}</td>
                             <td class="py-6 px-8">{{ $aluno->nome }}</td>
                             <td class="py-6 px-8">{{ $aluno->email }}</td>
+                            <td class="py-6 px-8 text-center">
+                                {{ $aluno->media !== null ? number_format($aluno->media, 1) : '—' }}
+                            </td>
+                            <td class="py-6 px-8 text-center">
+                                @if ($aluno->situacao === 'aprovado')
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-green-500/15 text-green-400 border border-green-500/30">
+                                        <span class="material-symbols-outlined text-sm">check_circle</span>
+                                        Aprovado
+                                    </span>
+                                @elseif ($aluno->situacao === 'reprovado')
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-red-500/15 text-red-400 border border-red-500/30">
+                                        <span class="material-symbols-outlined text-sm">cancel</span>
+                                        Reprovado
+                                    </span>
+                                @else
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/5 text-on-surface-variant border border-white/10">
+                                        Sem notas
+                                    </span>
+                                @endif
+                            </td>
                             <td class="py-6 px-8 text-right">
                                 <div class="flex justify-end gap-3">
                                     <a href="{{ url('/alunos/' . $aluno->id . '/edit') }}"
@@ -157,7 +200,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="py-12 px-8 text-center text-on-surface-variant">
+                            <td colspan="6" class="py-12 px-8 text-center text-on-surface-variant">
                                 Nenhum aluno cadastrado ainda.
                             </td>
                         </tr>

@@ -3,21 +3,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreNotaRequest;
 use App\Http\Requests\UpdateNotaRequest;
+use Illuminate\Http\Request;
 use App\Models\Nota;
 use App\Models\Aluno;
 
 class NotaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $notas = Nota::with('aluno')->get();
-        return view('notas.read', compact('notas'));
-    }
+        $busca = $request->get('busca');
 
-    public function create()
-    {
-        $alunos = Aluno::all();
-        return view('notas.create', compact('alunos'));
+        $notas = Nota::with('aluno')
+            ->when($busca, function ($query, $busca) {
+                $query->where('disciplina', 'like', "%{$busca}%")
+                    ->orWhereHas('aluno', function ($q) use ($busca) {
+                        $q->where('nome', 'like', "%{$busca}%");
+                    });
+            })
+            ->get();
+
+        return view('notas.read', compact('notas', 'busca'));
     }
 
     public function store(StoreNotaRequest $request)

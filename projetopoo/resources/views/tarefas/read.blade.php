@@ -129,6 +129,24 @@
                 </a>
             </div>
 
+            <!-- Busca -->
+            <form method="GET" action="{{ url('/tarefas') }}" class="mb-6">
+                <div class="relative max-w-[200px]">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/50 text-base">
+                        search
+                    </span>
+                    <input type="text" name="busca" value="{{ $busca ?? '' }}" placeholder="Buscar..."
+                        class="w-full bg-[#1c1f26] border border-white/10 rounded-lg py-1.5 pl-9 pr-3 text-xs text-on-surface placeholder:text-on-surface-variant/40 outline-none focus:border-primary/50 transition-all" />
+                </div>
+                @if (!empty($busca))
+                    <a href="{{ url('/tarefas') }}"
+                        class="text-xs text-on-surface-variant hover:text-primary mt-2 inline-block">
+                        Limpar busca
+                    </a>
+                @endif
+            </form>
+
             <div class="glass-panel rounded-xl overflow-hidden shadow-2xl">
                 <table class="w-full text-left border-collapse">
                     <thead>

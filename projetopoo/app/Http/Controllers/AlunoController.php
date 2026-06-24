@@ -5,19 +5,26 @@ use App\Http\Requests\StoreAlunoRequest;
 use App\Http\Requests\UpdateAlunoRequest;
 use App\Models\Aluno;
 use App\Models\Nota;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AlunoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $alunos = Aluno::all()->map(function ($aluno) {
+        $busca = $request->get('busca');
+
+        $alunos = Aluno::when($busca, function ($query, $busca) {
+            $query->where('nome', 'like', "%{$busca}%")
+                ->orWhere('email', 'like', "%{$busca}%");
+        })->get()->map(function ($aluno) {
             $media = Nota::where('id_aluno', $aluno->id)->avg('nota');
             $aluno->media = $media;
             $aluno->situacao = $media === null ? null : ($media >= 6.0 ? 'aprovado' : 'reprovado');
             return $aluno;
         });
-        return view('alunos.read', compact('alunos'));
+
+        return view('alunos.read', compact('alunos', 'busca'));
     }
 
     public function store(StoreAlunoRequest $request)

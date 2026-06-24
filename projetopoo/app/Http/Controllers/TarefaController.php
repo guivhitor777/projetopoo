@@ -3,14 +3,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTarefaRequest;
 use App\Http\Requests\UpdateTarefaRequest;
+use Illuminate\Http\Request;
 use App\Models\Tarefa;
 
 class TarefaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tarefas = Tarefa::all();
-        return view('tarefas.read', compact('tarefas'));
+        $busca = $request->get('busca');
+
+        $tarefas = Tarefa::when($busca, function ($query, $busca) {
+            $query->where('disciplina', 'like', "%{$busca}%")
+                ->orWhere('descricao', 'like', "%{$busca}%");
+        })->get();
+
+        return view('tarefas.read', compact('tarefas', 'busca'));
     }
 
     public function create()
