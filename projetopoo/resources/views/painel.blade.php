@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="dark" lang="pt-br">
-
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -104,10 +103,7 @@
 </head>
 
 <body class="bg-background text-on-background min-h-screen">
-
-    <!-- Sidebar -->
     <aside class="fixed left-0 top-0 h-screen w-sidebar-width bg-surface/40 backdrop-blur-xl border-r border-white/10 flex flex-col py-gutter px-4 z-50">
-
         <div class="mb-10 px-4">
             <h1 class="text-3xl font-bold text-primary tracking-tighter">
                 Aluno Modern
@@ -148,13 +144,9 @@
                 <span>Sair</span>
             </a>
         </nav>
-
     </aside>
-
-    <!-- Main -->
     <main class="ml-[280px] min-h-screen">
 
-        <!-- Header -->
         <header class="h-16 flex justify-between items-center px-container-padding-desktop bg-surface/30 backdrop-blur-lg border-b border-white/5 sticky top-0 z-40">
             <div></div>
             <div class="flex items-center gap-3 pl-4 border-l border-white/10">
@@ -166,8 +158,6 @@
         </header>
 
         <div class="p-gutter max-w-[1440px] mx-auto space-y-gutter">
-
-            <!-- Título + Atalhos -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <h2 class="font-display-lg text-display-lg text-white">Bem-vindo ao Aluno Modern</h2>
@@ -198,7 +188,6 @@
                 </div>
             </div>
 
-            <!-- Métricas -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
 
                 <div class="glass-card p-6 rounded-xl">
@@ -232,13 +221,9 @@
                     </div>
                     <p class="text-4xl font-bold text-white">{{ $mediaGeral ? number_format($mediaGeral, 1) : '—' }}</p>
                 </div>
-
             </div>
-
-            <!-- Gráfico + Tarefas próximas -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
 
-                <!-- Gráfico de médias por disciplina -->
                 <div class="glass-card p-6 rounded-xl lg:col-span-2">
                     <h3 class="text-lg font-bold text-white mb-1">Média por disciplina</h3>
                     <p class="text-on-secondary-container text-sm mb-4">Desempenho médio das notas lançadas no sistema.</p>
@@ -258,7 +243,6 @@
                     @endif
                 </div>
 
-                <!-- Tarefas próximas -->
                 <div class="glass-card p-6 rounded-xl">
                     <h3 class="text-lg font-bold text-white mb-1">Próximas tarefas</h3>
                     <p class="text-on-secondary-container text-sm mb-4">Prazos mais próximos cadastrados.</p>
@@ -282,12 +266,9 @@
                         <span class="material-symbols-outlined text-sm">arrow_forward</span>
                     </a>
                 </div>
-
             </div>
-
         </div>
 
-        <!-- Footer -->
         <footer class="py-8 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 opacity-40 text-center">
             <div class="flex items-center gap-4">
                 <div class="h-[1px] w-8 bg-white/30 hidden sm:block"></div>

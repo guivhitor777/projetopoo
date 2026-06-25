@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="dark" lang="pt-BR">
-
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -49,7 +48,6 @@
 
 <body class="min-h-screen">
 
-    <!-- Sidebar -->
     <aside
         class="fixed left-0 top-0 h-screen w-[280px] bg-surface/40 backdrop-blur-xl border-r border-white/10 flex flex-col py-6 px-4 z-50">
         <div class="mb-10 px-4">
@@ -81,7 +79,6 @@
         </nav>
     </aside>
 
-    <!-- Header -->
     <header
         class="ml-[280px] h-16 flex justify-between items-center px-10 bg-surface/30 backdrop-blur-lg border-b border-white/5 sticky top-0 z-40">
         <div></div>
@@ -93,7 +90,6 @@
         </div>
     </header>
 
-    <!-- Main -->
     <main class="ml-[280px] flex-1 flex flex-col overflow-hidden">
         <div class="flex-1 overflow-y-auto p-12 flex flex-col items-center">
 
@@ -128,7 +124,6 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-                        <!-- Nome -->
                         <div>
                             <label
                                 class="block text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3 ml-1">Nome
@@ -144,7 +139,6 @@
                             </div>
                         </div>
 
-                        <!-- Email -->
                         <div>
                             <label
                                 class="block text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3 ml-1">E-mail

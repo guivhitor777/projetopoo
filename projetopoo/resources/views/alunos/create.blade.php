@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="dark" lang="pt-br">
-
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -93,7 +92,6 @@
         </nav>
     </aside>
 
-    <!-- Header -->
     <header
         class="ml-[280px] h-16 flex justify-between items-center px-10 bg-surface/30 backdrop-blur-lg border-b border-white/5 sticky top-0 z-40">
         <div></div>
@@ -105,7 +103,6 @@
         </div>
     </header>
 
-    <!-- Main -->
     <main class="ml-[280px] min-h-screen p-12 flex flex-col items-center">
 
         <div class="w-full max-w-4xl mb-12">
@@ -137,8 +134,6 @@
                 @csrf
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-                    <!-- Nome -->
                     <div class="space-y-2">
                         <label class="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">Nome
                             Completo</label>
@@ -150,7 +145,6 @@
                         </div>
                     </div>
 
-                    <!-- Email -->
                     <div class="space-y-2">
                         <label class="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">E-mail</label>
                         <div
@@ -162,7 +156,6 @@
                         </div>
                     </div>
 
-                    <!-- Senha -->
                     <div class="space-y-2">
                         <label class="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">Senha
                             de Acesso</label>
@@ -175,7 +168,6 @@
                         </div>
                     </div>
 
-                    <!-- Confirmar Senha -->
                     <div class="space-y-2">
                         <label
                             class="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">Confirmar

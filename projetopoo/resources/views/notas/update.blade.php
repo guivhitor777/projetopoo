@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="dark" lang="pt-br">
-
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -51,7 +50,6 @@
 
 <body class="min-h-screen">
 
-    <!-- Sidebar -->
     <aside
         class="fixed left-0 top-0 h-screen w-[260px] bg-surface/40 backdrop-blur-xl border-r border-white/10 flex flex-col py-6 px-4 z-50">
         <div class="mb-10 px-4">
@@ -83,7 +81,6 @@
         </nav>
     </aside>
 
-    <!-- Header -->
     <header
         class="ml-[260px] h-20 px-8 flex items-center justify-between border-b border-white/10 bg-surface/50 backdrop-blur-md sticky top-0 z-40">
         <div>
@@ -98,7 +95,6 @@
         </div>
     </header>
 
-    <!-- Main -->
     <main class="ml-[260px] min-h-screen flex flex-col p-6">
         <div class="flex-1 flex flex-col items-center justify-center">
             <div class="w-full max-w-xl">
@@ -121,7 +117,6 @@
                         @csrf
                         @method('PUT')
 
-                        <!-- Aluno -->
                         <div class="space-y-2">
                             <label class="text-xs text-primary uppercase tracking-widest block">Aluno</label>
                             <select name="id_aluno" required
@@ -135,7 +130,6 @@
                             </select>
                         </div>
 
-                        <!-- Disciplina -->
                         <div class="space-y-2">
                             <label class="text-xs text-primary uppercase tracking-widest block">Disciplina</label>
                             <div class="relative">
@@ -147,7 +141,6 @@
                             </div>
                         </div>
 
-                        <!-- Nota -->
                         <div class="space-y-2">
                             <label class="text-xs text-primary uppercase tracking-widest block">Nota</label>
                             <div class="relative">

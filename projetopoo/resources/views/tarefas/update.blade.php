@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="dark" lang="pt-br">
-
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -63,8 +62,6 @@
 </head>
 
 <body class="bg-background text-on-surface min-h-screen overflow-x-hidden">
-
-    <!-- Sidebar -->
     <aside
         class="fixed left-0 top-0 h-screen w-[280px] bg-surface/40 backdrop-blur-xl border-r border-white/10 flex flex-col py-6 px-4 z-50">
         <div class="mb-10 px-4">
@@ -96,7 +93,6 @@
         </nav>
     </aside>
 
-    <!-- Header -->
     <header
         class="ml-[280px] h-16 flex justify-between items-center px-10 bg-surface/30 backdrop-blur-lg border-b border-white/5 sticky top-0 z-40">
         <div></div>
@@ -108,7 +104,6 @@
         </div>
     </header>
 
-    <!-- Main -->
     <main class="ml-[280px] p-6 min-h-[calc(100vh-64px)] flex flex-col items-center justify-center">
         <div class="w-full max-w-2xl mb-8">
             <h2 class="text-3xl font-bold text-on-surface">Editar Tarefa</h2>
@@ -128,7 +123,6 @@
                 @csrf
                 @method('PUT')
 
-                <!-- Disciplina -->
                 <div class="space-y-3 mb-6">
                     <label
                         class="font-label-caps text-[11px] tracking-[0.2em] text-primary/70 uppercase">Disciplina</label>
@@ -142,7 +136,6 @@
                     </div>
                 </div>
 
-                <!-- Descrição -->
                 <div class="space-y-3 mb-6">
                     <label
                         class="font-label-caps text-[11px] tracking-[0.2em] text-primary/70 uppercase">Descrição</label>
@@ -155,7 +148,6 @@
                     </div>
                 </div>
 
-                <!-- Prazo -->
                 <div class="space-y-3 mb-6">
                     <label class="font-label-caps text-[11px] tracking-[0.2em] text-primary/70 uppercase">Prazo de
                         Entrega</label>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="dark" lang="pt-br">
-
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -79,7 +78,6 @@
 <body
     class="bg-tech min-h-screen flex items-center justify-center p-6 selection:bg-primary-container selection:text-white">
 
-    <!-- Fundo -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px]"></div>
         <div
@@ -87,7 +85,6 @@
         </div>
     </div>
 
-    <!-- Cantos decorativos -->
     <div class="fixed top-8 left-8 w-16 h-16 border-t border-l border-white/10 pointer-events-none"></div>
     <div class="fixed top-8 right-8 w-16 h-16 border-t border-r border-white/10 pointer-events-none"></div>
     <div class="fixed bottom-8 left-8 w-16 h-16 border-b border-l border-white/10 pointer-events-none"></div>
@@ -95,7 +92,6 @@
 
     <main class="w-full max-w-[480px] z-10 relative">
 
-        <!-- Logo -->
         <div class="flex flex-col items-center mb-8">
             <div class="w-16 h-16 glass-panel rounded-xl flex items-center justify-center mb-6 border-primary/20">
                 <span class="material-symbols-outlined text-primary text-4xl">school</span>
@@ -103,12 +99,10 @@
             <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Criar Conta</h1>
         </div>
 
-        <!-- Formulário -->
         <section class="glass-panel p-8 rounded-2xl">
             <form action="{{ url('/register') }}" class="space-y-5" method="POST">
                 @csrf
 
-                <!-- Erros de validação -->
                 @if ($errors->any())
                     <div class="bg-red-500/20 border border-red-500 text-red-300 p-4 rounded-lg">
                         <ul class="list-disc list-inside space-y-1 text-sm">
@@ -119,7 +113,6 @@
                     </div>
                 @endif
 
-                <!-- Nome -->
                 <div class="space-y-2">
                     <label
                         class="font-label-caps text-label-caps text-on-surface-variant block uppercase tracking-widest">
@@ -133,7 +126,6 @@
                     </div>
                 </div>
 
-                <!-- Email -->
                 <div class="space-y-2">
                     <label
                         class="font-label-caps text-label-caps text-on-surface-variant block uppercase tracking-widest">
@@ -148,7 +140,6 @@
                     </div>
                 </div>
 
-                <!-- Senha e Confirmar -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="space-y-2">
                         <label
@@ -179,16 +170,13 @@
                     </div>
                 </div>
 
-                <!-- Botão -->
                 <button
                     class="w-full bg-primary-container text-on-primary-container font-label-caps text-label-caps py-4 rounded-lg font-bold tracking-[0.2em] hover:bg-primary transition-all active:scale-[0.98] shadow-lg shadow-primary/20"
                     type="submit">
                     CADASTRAR NO SISTEMA
                 </button>
-
             </form>
 
-            <!-- Link para login -->
             <div class="mt-6 pt-5 border-t border-white/10 text-center">
                 <p class="text-on-surface-variant text-sm">
                     Já tem uma conta?
@@ -198,7 +186,6 @@
 
         </section>
 
-        <!-- Footer -->
         <footer class="mt-8 flex justify-center items-center gap-4 opacity-40">
             <div class="h-[1px] w-8 bg-white/30 hidden sm:block"></div>
             <span class="font-label-caps text-[10px] tracking-[0.3em] text-on-surface uppercase">Aluno Modern</span>
@@ -207,7 +194,6 @@
 
     </main>
 
-    <!-- SweetAlert para erros vindos de session -->
     @if (session('error'))
         <script>
             Swal.fire({

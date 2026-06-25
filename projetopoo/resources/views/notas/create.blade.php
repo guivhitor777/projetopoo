@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="dark" lang="pt-br">
-
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -50,7 +49,6 @@
 
 <body class="bg-background text-on-surface overflow-x-hidden">
 
-    <!-- Sidebar -->
     <aside
         class="fixed left-0 top-0 h-screen w-[280px] bg-surface/40 backdrop-blur-xl border-r border-white/10 flex flex-col py-6 px-4 z-50">
         <div class="mb-10 px-4">
@@ -82,7 +80,6 @@
         </nav>
     </aside>
 
-    <!-- Main -->
     <main class="ml-[280px] min-h-screen flex flex-col">
         <header
             class="flex justify-between items-center h-16 px-6 sticky top-0 bg-surface/80 backdrop-blur-md border-b border-white/10 z-40">
@@ -117,7 +114,6 @@
                 <form action="{{ url('/notas') }}" method="POST" class="space-y-6">
                     @csrf
 
-                    <!-- Aluno -->
                     <div class="space-y-2">
                         <label class="text-xs text-on-surface-variant tracking-wider uppercase">Aluno</label>
                         <select name="id_aluno" required
@@ -131,7 +127,6 @@
                         </select>
                     </div>
 
-                    <!-- Disciplina -->
                     <div class="space-y-2">
                         <label class="text-xs text-on-surface-variant tracking-wider uppercase">Disciplina</label>
                         <input type="text" name="disciplina" value="{{ old('disciplina') }}"
@@ -139,7 +134,6 @@
                             class="w-full bg-surface-container-lowest border border-white/10 rounded-lg px-4 py-3 text-on-surface outline-none" />
                     </div>
 
-                    <!-- Nota -->
                     <div class="space-y-2">
                         <label class="text-xs text-on-surface-variant tracking-wider uppercase">Nota</label>
                         <input type="number" name="nota" value="{{ old('nota') }}" min="0" max="10" step="0.01"

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="dark" lang="pt-br">
-
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -64,8 +63,6 @@
 </head>
 
 <body>
-
-    <!-- Sidebar -->
     <aside
         class="fixed left-0 top-0 h-screen w-[280px] bg-surface/40 backdrop-blur-xl border-r border-white/10 flex flex-col py-6 px-4 z-50">
         <div class="mb-10 px-4">
@@ -97,7 +94,6 @@
         </nav>
     </aside>
 
-    <!-- Header -->
     <header
         class="ml-[280px] h-20 px-8 flex items-center justify-between border-b border-white/10 bg-surface/50 backdrop-blur-md sticky top-0 z-40">
         <div>
@@ -112,7 +108,6 @@
         </div>
     </header>
 
-    <!-- Main -->
     <main class="ml-[280px] pt-8 min-h-screen flex flex-col">
         <div class="p-8 flex-1">
 
@@ -129,7 +124,6 @@
                 </a>
             </div>
 
-            <!-- Busca -->
             <form method="GET" action="{{ url('/tarefas') }}" class="mb-6">
                 <div class="relative max-w-[200px]">
                     <span
