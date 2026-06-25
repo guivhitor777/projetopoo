@@ -146,8 +146,6 @@
                         <th class="py-5 px-8">ID</th>
                         <th class="py-5 px-8">Nome Completo</th>
                         <th class="py-5 px-8">E-mail Institucional</th>
-                        <th class="py-5 px-8 text-center">Média</th>
-                        <th class="py-5 px-8 text-center">Situação</th>
                         <th class="py-5 px-8 text-right">Ações</th>
                     </tr>
                 </thead>
@@ -157,29 +155,6 @@
                             <td class="py-6 px-8">{{ $aluno->id }}</td>
                             <td class="py-6 px-8">{{ $aluno->nome }}</td>
                             <td class="py-6 px-8">{{ $aluno->email }}</td>
-                            <td class="py-6 px-8 text-center">
-                                {{ $aluno->media !== null ? number_format($aluno->media, 1) : '—' }}
-                            </td>
-                            <td class="py-6 px-8 text-center">
-                                @if ($aluno->situacao === 'aprovado')
-                                    <span
-                                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-green-500/15 text-green-400 border border-green-500/30">
-                                        <span class="material-symbols-outlined text-sm">check_circle</span>
-                                        Aprovado
-                                    </span>
-                                @elseif ($aluno->situacao === 'reprovado')
-                                    <span
-                                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-red-500/15 text-red-400 border border-red-500/30">
-                                        <span class="material-symbols-outlined text-sm">cancel</span>
-                                        Reprovado
-                                    </span>
-                                @else
-                                    <span
-                                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/5 text-on-surface-variant border border-white/10">
-                                        Sem notas
-                                    </span>
-                                @endif
-                            </td>
                             <td class="py-6 px-8 text-right">
                                 <div class="flex justify-end gap-3">
                                     <a href="{{ url('/alunos/' . $aluno->id . '/edit') }}"
@@ -200,7 +175,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="py-12 px-8 text-center text-on-surface-variant">
+                            <td colspan="4" class="py-12 px-8 text-center text-on-surface-variant">
                                 Nenhum aluno cadastrado ainda.
                             </td>
                         </tr>

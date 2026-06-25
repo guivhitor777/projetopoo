@@ -1,11 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreAlunoRequest;
 use App\Http\Requests\UpdateAlunoRequest;
 use App\Models\Aluno;
 use App\Models\Nota;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AlunoController extends Controller
@@ -17,14 +17,14 @@ class AlunoController extends Controller
         $alunos = Aluno::when($busca, function ($query, $busca) {
             $query->where('nome', 'like', "%{$busca}%")
                 ->orWhere('email', 'like', "%{$busca}%");
-        })->get()->map(function ($aluno) {
-            $media = Nota::where('id_aluno', $aluno->id)->avg('nota');
-            $aluno->media = $media;
-            $aluno->situacao = $media === null ? null : ($media >= 6.0 ? 'aprovado' : 'reprovado');
-            return $aluno;
-        });
+        })->get();
 
         return view('alunos.read', compact('alunos', 'busca'));
+    }
+
+    public function create()
+    {
+        return view('alunos.create');
     }
 
     public function store(StoreAlunoRequest $request)

@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreNotaRequest;
 use App\Http\Requests\UpdateNotaRequest;
-use Illuminate\Http\Request;
 use App\Models\Nota;
 use App\Models\Aluno;
 
@@ -23,6 +23,12 @@ class NotaController extends Controller
             ->get();
 
         return view('notas.read', compact('notas', 'busca'));
+    }
+
+    public function create()
+    {
+        $alunos = Aluno::all();
+        return view('notas.create', compact('alunos'));
     }
 
     public function store(StoreNotaRequest $request)
